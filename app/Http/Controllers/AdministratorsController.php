@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CellApproval;
+use App\Models\SectorApproval;
 use App\Models\Users;
 use App\Models\VillageApproval;
 use Illuminate\Http\Request;
@@ -113,16 +115,79 @@ class AdministratorsController extends Controller
     }
 
       // Approve Village pendind application
-    public function ApproveVillageApplications(Request $request){
+    public function ApproveVillageApplications(Request $request, $id){
 
-        $cellapplicant = new  cellapplication();
-        $cellapplicant->village_id = $request -> id;
-        $cellapplicant->coordinator_id = "";
+        $cellapplicant = new CellApproval();
+        $cellapplicant->village_id = $id;
         $cellapplicant->approval_status = 'pending';
         $cellapplicant->remember_token=str_random(18);
+       $success = $cellapplicant->save();
+        if($success){
+   //       if application has been transfered to the cell level successfully update village to approved and add admin id
+
+            $coord_id = Session::get('citizensession');
+            $villageapplication = VillageApproval::find($id);
+
+            $villageapplication -> coordinator_id = $coord_id;
+            $villageapplication -> approval_status = "permited";
+            $villageapplication -> save();
+            $request->session()->flash('success', 'Application has be approved approve and transfered');
+            return redirect("/admin/new/applicant");
+        }
+    }
+
+    // Approve Cell  pendind application
+    public function ApproveCellApplications(Request $request, $id){
+
+        $sectorapplicant = new SectorApproval();
+        $sectorapplicant-> cell_id = $id;
+        $sectorapplicant-> approval_status = 'pending';
+        $sectorapplicant-> feeback = 'null';
+        $sectorapplicant->remember_token=str_random(18);
+       $success = $sectorapplicant->save();
+        if($success){
+   //       if application has been transfered to the sector level successfully update village to approved and add admin id
+
+            $coord_id = Session::get('citizensession');
+            $cellapplication = CellApproval::find($id);
+
+            $cellapplication -> coordinator_id = $coord_id;
+            $cellapplication -> approval_status = "approved";
+            $cellapplication -> save();
+            $request->session()->flash('success', 'Application has be approved approve and transfered');
+            return redirect("/admin/new/applicant");
+        }
+    }
+
+
+    // Approve Sector  pendind application
+    public function ApproveSectorApplications(Request $request, $id){
+        $landmanger_id = Session::get('citizensession');
+        $sectorapplicant = SectorApproval::find($id);
+
+        $sectorapplicant-> approval_status = 'permited';
+        $sectorapplicant-> landmanager_id = $landmanger_id;
+        $sectorapplicant-> feeback = 'Congraturations, your application was granted, you may come to the office for official stamp';
+        $sectorapplicant->save();
+
         $request->session()->flash('success', 'Application has be approved approve and transfered');
-        $cellapplicant->save();
-        return redirect("/admin/new/applicant");
+            return redirect("/admin/new/applicant");
+
+    }
+
+    // Approve Sector  pendind application reject
+    public function RejectSectorApplications(Request $request, $id){
+        $landmanger_id = Session::get('citizensession');
+        $sectorapplicant = SectorApproval::find($id);
+
+        $sectorapplicant-> approval_status = 'rejected';
+        $sectorapplicant-> landmanager_id = $landmanger_id;
+        $sectorapplicant-> feeback = 'Sorry, your application was rejected, for more details  come to the land manager office';
+        $sectorapplicant->save();
+
+        $request->session()->flash('success', 'Application has be approved approve and transfered');
+            return redirect("/admin/new/applicant");
+
     }
 
 //    Display pending applications from villlage to sector
@@ -137,11 +202,9 @@ class AdministratorsController extends Controller
 
         if(($userInfo['role'])== "Village coordinator" ){
            // fetch all village applications
-
             $adminVillage = $userInfo['village'];
             $applicant = $function ->VillageApplication($adminVillage);
-            $request->session()->flash('error', 'Village application (s)');
-            $request->session()->flash('Village', 'Village)');
+            $request->session()->flash('village', 'Village application (s))');
 
             return view('admin_newapplicants')
                   -> with("applicant", $applicant)
@@ -151,9 +214,7 @@ class AdministratorsController extends Controller
 
              $adminCell = $userInfo['cell'];
             $applicant = $function ->CellApplication($adminCell);
-            $request->session()->flash('error', 'Cell application (s)');
-            $request->session()->flash('Cell', 'Cell)');
-
+            $request->session()->flash('cell', 'Cell application (s))');
             return view('admin_newapplicants')
                 ->with("applicant", $applicant)
                 -> with('userInfo',$userInfo);
@@ -162,8 +223,7 @@ class AdministratorsController extends Controller
 
             $adminSector = $userInfo['sector'];
             $applicant = $function ->SectorApplication($adminSector);
-            $request->session()->flash('error', 'Sector application (s)');
-            $request->session()->flash('Sector', 'Sector)');
+            $request->session()->flash('sector', 'Sector application (s)');
             return view('admin_newapplicants')
                 ->with("applicant", $applicant)
                 -> with('userInfo',$userInfo);

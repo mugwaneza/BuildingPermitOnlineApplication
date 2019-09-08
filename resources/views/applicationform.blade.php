@@ -1,7 +1,8 @@
 @extends('main')
 
 @include('citizen_menus')
-<div class="analytics-sparkle-area">
+
+ <div class="analytics-sparkle-area">
     <div class="container-fluid dasboardcontainer">
         <div class="product-tab-list tab-pane fade active in" id="description">
             <div class="row">
@@ -9,6 +10,8 @@
                     <div class="review-content-section">
                         <div id="dropzone1" class="pro-ad">
                             <br><h3 class="col-md-offset-2 "> Fill the following form for building permit application</h3><br>
+
+
                             <form action="/apply" class="dropzone dropzone-custom needsclick add-professors" method="post" id="demo1-upload" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @include('error_message')
@@ -66,6 +69,6 @@
             </div>
         </div>
 
-    </div>
-</div>
+      </div>
+  </div>
 @include('footer')

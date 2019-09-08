@@ -2,16 +2,16 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href=""><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+            <a href=""><img class="main-logo" src="{{asset('/img/logo/logo.png')}}" alt="" /></a>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li class="active">
-                        <a class="has-arrow" href="">
+                         <a class="has-arrow" href="">
                             <span class="educate-icon educate-home icon-wrap"></span>
                             <span class="mini-click-non">Application</span>
-                        </a>
+                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
                             <li><a  href="/citizen/satus"><span class="mini-sub-pro">Application(s) status</span></a></li>
                             <li><a  href="/citizen"><span class="mini-sub-pro">Application form</span></a></li>

@@ -30,7 +30,7 @@ class Functions extends Controller
         // Querry to join users , Village
         $data = DB::table('users')
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
-            ->select('users.*', 'villageapplication.approval_status as vapproval','villageapplication.created_at as vtime')
+            ->select('users.*','villageapplication.reason','villageapplication.id as vid','villageapplication.landcertificate', 'villageapplication.approval_status as vapproval','villageapplication.created_at as vtime')
             ->where('users.village', $adminVillage)
             ->paginate(6);
         return $data;
@@ -42,7 +42,7 @@ class Functions extends Controller
         $data = DB::table('users')
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
             ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
-            ->select('users.*', 'villageapplication.*', 'cellapplication.approval_status as capproval','cellapplication.created_at as ctime')
+            ->select('users.*', 'villageapplication.*','cellapplication.id as cid', 'cellapplication.approval_status as capproval','cellapplication.created_at as ctime')
             ->where('users.cell', $adminCell)
             -> paginate(6);
         return $data;
@@ -56,7 +56,7 @@ class Functions extends Controller
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
             ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
             ->join('sectorapplication', 'cellapplication.id', '=', 'sectorapplication.cell_id')
-            ->select('users.*', 'villageapplication.*', 'cellapplication.*', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime')
+            ->select('users.*', 'villageapplication.*', 'cellapplication.*','sectorapplication.id as sid', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime')
             ->where('users.sector', $adminSector)
             -> paginate(8);
         return $data;

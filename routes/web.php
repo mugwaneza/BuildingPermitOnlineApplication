@@ -23,7 +23,10 @@ Route::get('/getapp', 'Functions@globalFunction');
 Route::post('/register/admin', 'AdministratorsController@CreateAdmin');
 Route::post('/admin/update', 'AdministratorsController@UpdateAdmin');
 Route::post('admin/delete', 'AdministratorsController@DeleteAdmin');
-Route::post('/admin/village/approval', 'AdministratorsController@ApproveVillageApplications');
+Route::post('/admin/village/approval/{id}', 'AdministratorsController@ApproveVillageApplications');
+Route::post('/admin/cell/approval/{id}', 'AdministratorsController@ApproveCellApplications');
+Route::post('/admin/sector/approval/{id}', 'AdministratorsController@ApproveSectorApplications');
+Route::post('/admin/sector/reject/{id}', 'AdministratorsController@RejectSectorApplications');
 
 //Main Home route
 Route::get('/', 'WelcomeController@Home');
@@ -41,8 +44,7 @@ Route::post('/apply','WelcomeController@CitizenApply' );
 Route::get('/citizen', 'WelcomeController@CitizenDashboard');
 Route::get('/citizen/satus', 'WelcomeController@CitizenStatus');
 
-// Access Admin route for applicant
-Route::get('/citizen', 'AdministratorsController@AdminDashboard');
+
 
 
 

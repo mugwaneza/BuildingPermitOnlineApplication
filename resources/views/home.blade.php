@@ -2,13 +2,15 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>BPOA</title>
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>EBPOA</title>
+
+    <title>BPOA</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('css/vendor/bootstrap.min.css')}}" rel="stylesheet">
@@ -25,7 +27,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">EBPOA</a>
+        <a class="navbar-brand" href="#">BPOA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -89,9 +91,9 @@
 <!-- Content section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="offset-1">Welcome to Electronic Building Permit Online Application</h2>
+        <h2 class="offset-1">Welcome to Building Permit Online Application</h2>
         <p class="lead offset-4">Applied service is offered in expected time</p>
-        <p>Electronic Building Permit Online Application facilitates all citizens of Rwanda to apply for building permit electronically from their homes without spending their time and money going physically to the offices of the ones who are responsible of this service in public sector.</p>
+        <p>Building Permit Online Application facilitates all citizens of Rwanda to apply for building permit online from their homes without spending their time and money going physically to the offices of the ones who are responsible of this service in public sector.</p>
     </div>
 </section>
 
@@ -107,7 +109,7 @@
                     <a href="#">
                         <img src="img/apply.jpg" alt="recive" style="width:100%">
                         <div class="caption">
-                            <p>With Electronic Building Permit Online Application ,we receive your applications in local government institituion</p>
+                            <p>With  Building Permit Online Application ,we receive your applications in local government institituion</p>
                         </div>
                     </a>
                 </div>
@@ -117,7 +119,7 @@
                     <a href="#">
                         <img src="img/process4.jpg" alt="processing" style="width:100%">
                         <div class="caption">
-                            <p>With Electronic Building Permit Online Application, we process your application</p>
+                            <p>With Building Permit Online Application, we process your application</p>
                         </div>
                     </a>
                 </div>
@@ -127,7 +129,7 @@
                     <a href="#">
                         <img src="img/feedback.jpg" alt="approval" style="width:100%">
                         <div class="caption">
-                            <p>With Electronic Building Permit Online Application, we provide Favourable application feedback</p>
+                            <p>With Building Permit Online Application, we provide Favourable application feedback</p>
                         </div>
                     </a>
                 </div>
@@ -152,7 +154,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Electronic Building Permit Online Application 2019</p>
+        <p class="m-0 text-center text-white">Copyright &copy;Building Permit Online Application 2019</p>
     </div>
     <!-- /.container -->
 </footer>

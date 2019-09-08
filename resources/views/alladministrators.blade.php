@@ -55,7 +55,7 @@
         </div>
     </div>
    </div>
-        <!-- Modal -->
+        <!-- Modal Edit administrator -->
         <div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="modeledit" aria-hidden="true">
             <div class="modal-dialog" role="">
                 <div class="modal-content">
@@ -71,8 +71,8 @@
                             <div class="row">
                                 @include('error_message')
 
-                                <div class="form-group col-lg-12 " >
-                                    <input class="form-control" hidden  id="dialogid" name="dialogid" placeholder="id" value="">
+                                <div class="form-group col-lg-12 "  hidden>
+                                    <input class="form-control"  id="dialogid" name="dialogid" placeholder="id" value="">
                                 </div
 
                                  > <div class="form-group col-lg-12 {{ $errors->has('name') ? ' has-error' : '' }}">

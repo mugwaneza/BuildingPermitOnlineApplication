@@ -7,7 +7,24 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="review-content-section main-container-admin mt-5">
                         <div id="dropzone1" class="pro-ad">
-                            <br><h3 class="col-md-offset-0 ">@include("error_message")</h3><br>
+                            <br><h3 class="col-md-offset-0 ">
+                                @if(session('village'))
+                                    <div class="alert alert-warning">
+                                        {{session('village')}}
+                                    </div>
+                                    @elseif(session('cell'))
+                                    <div class="alert alert-warning">
+                                        {{session('cell')}}
+                                    </div>
+                                @elseif(session('sector'))
+                                    <div class="alert alert-warning">
+                                        {{session('sector')}}
+                                    </div>
+                                @endif
+                                    @include('error_message')
+
+                            </h3>
+                            <br>
                             <table class="table table table-responsive table-bordered table-hover table-striped">
                                 @if($applicant -> count()>0)
 
@@ -18,7 +35,7 @@
                                 <th>Application status</th>
                                 <th>created on</th>
                                 <th>View</th>
-                                <th>Approve</th>
+                                <th>Decision</th>
 
                                 @if(session('Sector'))
                                     <th>Reject</th>
@@ -31,7 +48,13 @@
                                         <?php $count++ ?>
                                         <tr>
                                             <td> <?php echo $count  ?></td>
-                                            <td hidden class="id">{{$vapp -> id }}</td>
+                                            @if(session('village'))
+                                            <td hidden class="vid">{{$vapp -> vid }}</td>
+                                            @elseif(session('cell'))
+                                            <td hidden class="cid">{{$vapp -> cid }}</td>
+                                            @elseif(session('sector'))
+                                            <td hidden class="sid">{{$vapp -> sid }}</td>
+                                            @endif
                                             <td hidden class="reason">{{$vapp -> reason }}</td>
                                             <td hidden class="name">{{$vapp -> name }}</td>
                                             <td hidden class="village">{{$vapp -> village }}</td>
@@ -48,15 +71,15 @@
                                                     </a>
                                                 </button>
                                             </td>
-                                            @if(session('Sector'))
+                                            @if(session('sector'))
                                             <td><span class="text-warning">{{$vapp -> sapproval }}..</span></td>
                                             <td>{{$vapp -> stime  }}</td>
 
-                                                @elseif(session('Cell'))
+                                              @elseif(session('cell'))
                                                 <td><span class="text-warning">{{$vapp -> capproval }}..</span></td>
                                                 <td>{{$vapp -> ctime  }}</td>
 
-                                              @elseif(session('Village'))
+                                              @elseif(session('village'))
                                                 <td><span class="text-warning">{{$vapp -> vapproval }}..</span></td>
                                                 <td>{{$vapp -> vtime  }}</td>
 
@@ -64,25 +87,21 @@
                                             <td>
                                                 <button class="btn btn-info btn-sm btnDetails">Details</button>
                                              <td>
-                                                @if(session('Sector') && ($vapp -> sapproval) =="pending")
+                                                @if(session('sector') && ($vapp -> sapproval) =="pending")
                                                     <button class="btn btn-success btn-sm ApproveBtn" >Approve</button>
-                                                    @elseif(session('Cell') && ($vapp -> capproval) =="pending")
-                                                    <button class="btn btn-success btn-sm ApproveBtn" >Approve</button>
-                                                @elseif(session('Village') && ($vapp -> vapproval) =="pending")
-                                                    <button class="btn btn-success btn-sm ApproveBtn" >Approve</button>
+                                                    <button  class="btn btn-danger btn-sm RejectBtn" > Reject</button>
+
+                                                @elseif(session('cell') && ($vapp -> capproval) =="pending")
+                                                    <button class="btn btn-success btn-sm cApproveBtn" >Approve</button>
+
+                                                @elseif(session('village') && ($vapp -> vapproval) =="pending")
+                                                    <button class="btn btn-success btn-sm vApproveBtn" >Approve</button>
                                                 @else
-                                                   <button disabled class="btn btn-warning btn-sm ApproveBtn" >Approve</button>
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                @if(session('Sector') && ($vapp -> sapproval) =="pending")
-                                                    <button class="btn btn-danger btn-sm RejectBtn" >reject</button>
-                                                    @elseif((session('Sector') && ($vapp -> sapproval) =="rejected") || ($vapp -> sapproval) =="permitted")
-                                                   <button disabled class="btn btn-danger btn-sm RejectBtn" >reject</button>
+                                                   <button disabled class="btn btn-warning btn-sm ApproveBtn" >No action</button>
 
                                                 @endif
                                             </td>
+
 
                                         </tr>
                                     @endforeach

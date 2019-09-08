@@ -1,6 +1,7 @@
 @extends('main')
-
+ @section('content')
    @include('citizen_menus')
+
     <div class="analytics-sparkle-area">
         <div class="container-fluid dasboardcontainer">
 
@@ -9,8 +10,8 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="review-content-section">
                             <div id="dropzone1" class="pro-ad">
-                                <br><h3 class="col-md-offset-2 "> Fill the following form for building permit application</h3><br>
-
+                                <br><h3 class="col-md-offset-2 " style="margin-top: 50px;">Personal applications</h3><br>
+                                @if($villageapp -> count()>0)
 
                                 <table class="table table table-responsive table-bordered table-hover table-striped">
                                     <thead>
@@ -24,7 +25,6 @@
                                         <th>View</th>
                                     </thead>
                                     <tbody>
-                                    @if($villageapp -> count()>0)
                                        <?php $count = 0 ?>
                                     @foreach($villageapp as $vapp)
                                         <?php $count++ ?>
@@ -62,20 +62,23 @@
                                             @endif
                                         </td>
                                     </tr>
-                                        @endforeach
-                                       @endif
-                                      </tbody>
+                                    @endforeach
+
+                                    </tbody>
                                 </table>
+                                @else
+                                    <p class="col-md-offset-2 mt-5">Sorry ! you have no available application this time</p>
+                                @endif
 
 
 
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+     </div>
 @include('footer')
 

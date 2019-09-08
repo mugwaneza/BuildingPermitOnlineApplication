@@ -90,9 +90,7 @@ class WelcomeController extends Controller
            // Create a user session
            Session::put('citizensession', Auth::user()->id );
 
-            $id = Session::get('citizensession');
-
-             $user =  Users()::find($id);
+             $user =  Users ::find( Auth::user()->id);
             if($user['role']=="citizen"){
                 //when user is an applicant
                 return redirect('/citizen/satus');
@@ -106,9 +104,8 @@ class WelcomeController extends Controller
         elseif(Auth::attempt(['email'=>$request->nid, 'password'=>$request->password])) {
             // Create a user session
             Session::put('citizensession', Auth::user()->id );
-            $id = Session::get('citizensession');
 
-            $user =  Users()::find($id);
+            $user =  Users::find( Auth::user()->id);
             if($user['role']=="citizen"){
                 //when user is an applicant
                 return redirect('/citizen/satus');

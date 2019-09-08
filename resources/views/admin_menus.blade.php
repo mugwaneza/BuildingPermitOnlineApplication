@@ -2,8 +2,7 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-            <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
+            <a href=""><img class="main-logo" src="{{asset('/img/logo/logo.png')}}" alt="" /></a>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
@@ -109,7 +108,9 @@
 
                                     <li><a data-toggle="collapse" data-target="#Charts" href="#">Applications <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         <ul class="collapse dropdown-header-top">
+                                            <li><a href="/admin/new/applicant">New Applicants</a></li>
                                             <li><a href="/admin/new/applicant">All Applicants</a></li>
+
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demoevent" href="#">Manage <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
