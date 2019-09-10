@@ -8,7 +8,7 @@
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li class="active">
-                        <a class="has-arrow" href="index.html">
+                        <a class="has-arrow" href="/all/admin">
                             <span class="educate-icon educate-home icon-wrap"></span>
                             <span class="mini-click-non">Applications</span>
                         </a>
@@ -18,7 +18,7 @@
                     </li>
 
                     <li>
-                        <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Manage</span></a>
+                        <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Manage</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All Professors" href="/all/admin"><span class="mini-sub-pro">All Administrator  </span></a></li>
                             <li><a title="Add Professor" href="/register/admin"><span class="mini-sub-pro">Register accounts</span></a></li>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    <a href="#"><img class="main-logo" src="{{asset('/img/logo/logo.png')}}" alt="" /></a>
                 </div>
             </div>
         </div>
@@ -106,12 +106,7 @@
 
 
 
-                                    <li><a data-toggle="collapse" data-target="#Charts" href="#">Applications <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul class="collapse dropdown-header-top">
-                                            <li><a href="/admin/new/applicant">New Applicants</a></li>
-                                            <li><a href="/admin/new/applicant">All Applicants</a></li>
-
-                                        </ul>
+                                    <li><a data-toggle="collapse" data-target="" href="#">Applications <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demoevent" href="#">Manage <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         <ul id="demoevent" class="collapse dropdown-header-top">

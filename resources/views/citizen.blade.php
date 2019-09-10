@@ -11,56 +11,53 @@
                         <div class="review-content-section">
                             <div id="dropzone1" class="pro-ad">
                                 <br><h3 class="col-md-offset-2 " style="margin-top: 50px;">Personal applications</h3><br>
-                                @if($villageapp -> count()>0)
+                                @if($basic -> count()>0)
 
                                 <table class="table table table-responsive table-bordered table-hover table-striped">
                                     <thead>
                                         <th>No</th>
                                         <th>Application reason</th>
                                         <th>File</th>
-                                        <th>Application Atatus</th>
-                                        <th>Application level</th>
+                                        <th>Application status</th>
+                                        {{--<th>Application level</th>--}}
                                         <th>Time</th>
-                                        <th>Edit</th>
-                                        <th>View</th>
+                                        {{--<th>Edit</th>--}}
+                                        {{--<th>View</th>--}}
                                     </thead>
                                     <tbody>
                                        <?php $count = 0 ?>
-                                    @foreach($villageapp as $vapp)
+                                    @foreach($basic as $vapp)
                                         <?php $count++ ?>
                                     <tr>
                                         <td> <?php echo $count  ?></td>
-                                        <td>{{$vapp['reason']}}</td>
+                                        <td>{{$vapp -> reason}}</td>
                                         <td>
                                             <button type="button" class="btn btn-md btn-default" >
                                                 <span class="fa fa-clipboard "></span> </a>
-                                                <a href="{{$vapp['landcertificate']}}" download>
+                                                <a href="{{$vapp -> landcertificate}}" download>
                                                     <span class="fa fa-download "></span> </a>
                                             </button>
                                         </td>
-                                        @if($vapp['approval_status']!="pending")
 
-                                            <td><span class="text-warning">active</span></td>
-                                         @else
-                                        <td><span class="text-warning">{{$vapp['approval_status']}}..</span></td>
-                                         @endif
+                                        <td><span class="text-warning">{{$vapp -> approval_status}}</span></td>
 
-                                        <td><span class="text-danger">Village</span></td>
-                                        <td>{{$vapp['created_at']}}</td>
-                                        <td>
-                                            @if($vapp['approval_status']!="pending")
-                                            <button class="btn btn-primary btn-sm disabled">Edit</button>
-                                                @else
-                                                <button class="btn btn-primary btn-sm">Edit</button>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($vapp['approval_status']!="pending")
-                                            <button class="btn btn-info btn-sm">Details</button>
-                                                @else
-                                                <button class="btn btn-info btn-sm disabled">Details</button>
-                                            @endif
-                                        </td>
+                                        <td>{{$vapp -> created_at}}</td>
+
+                                        {{--<td>--}}
+                                            {{--@if( $vapp->vapproval !="pending")--}}
+                                            {{--<button class="btn btn-primary btn-sm disabled">Edit</button>--}}
+                                                {{--@else--}}
+                                                {{--<button class="btn btn-primary btn-sm">Edit</button>--}}
+                                            {{--@endif--}}
+                                        {{--</td>--}}
+                                        {{--<td>--}}
+                                            {{--@if( $vapp -> vapproval!="pending")--}}
+                                            {{--<button class="btn btn-info btn-sm">Details</button>--}}
+                                                {{--@else--}}
+                                                {{--<button class="btn btn-info btn-sm disabled">Details</button>--}}
+                                            {{--@endif--}}
+                                        {{--</td>--}}
+
                                     </tr>
                                     @endforeach
 
@@ -80,5 +77,5 @@
 
         </div>
      </div>
-@include('footer')
 
+   @include('footer')

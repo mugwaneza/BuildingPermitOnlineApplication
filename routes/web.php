@@ -18,7 +18,6 @@ Route::get('/admin/dashboard', 'AdministratorsController@Welcome');
 Route::get('/admin/new/applicant', 'AdministratorsController@Myapplicants');
 Route::get('/register/admin', 'AdministratorsController@RegisterAdmin');
 Route::get('/all/admin', 'AdministratorsController@AllAdmin');
-Route::get('/getapp', 'Functions@globalFunction');
 
 Route::post('/register/admin', 'AdministratorsController@CreateAdmin');
 Route::post('/admin/update', 'AdministratorsController@UpdateAdmin');
@@ -37,12 +36,16 @@ Route::post('/register', 'WelcomeController@CitizenRegister');
 Route::get('/login', 'WelcomeController@Login');
 Route::post('/login', 'WelcomeController@CreateLogin');
 Route::get('/signout', 'WelcomeController@destroy');
-
 Route::post('/apply','WelcomeController@CitizenApply' );
 
 // Access Citizen dashboard
 Route::get('/citizen', 'WelcomeController@CitizenDashboard');
 Route::get('/citizen/satus', 'WelcomeController@CitizenStatus');
+
+// testing routes
+Route::get('/getapp', 'Functions@globalFunction');
+
+
 
 
 

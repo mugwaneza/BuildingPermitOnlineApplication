@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href=""><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    <a href=""><img class="main-logo" src="{{asset('/img/logo/logo.png')}}" alt="" /></a>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
 
 
 
-                                    <li><a data-toggle="collapse" data-target="#Charts" href="#">Application <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                    <li><a data-toggle="collapse" data-target="" href="/citizen/satus">Application <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         <ul class="collapse dropdown-header-top">
                                     <li><a  href="/citizen/satus">Application(s) status</a></li>
                                     <li><a  href="/citizen">Application form</a></li>

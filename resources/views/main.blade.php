@@ -71,17 +71,11 @@
            @yield('content')
 
 
-           </body>
 
         <!-- jquery
                ============================================ -->
         <script src="{{@asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
-        <!-- bootstrap JS
-        ============================================ -->
-        <script src="{{@asset('js/bootstrap.min.js')}}"></script>
-        <!-- wow JS
-        ============================================ -->
-        <script src="{{@asset('js/wow.min.js')}}"></script>
+
         <!-- price-slider JS
         ============================================ -->
         <script src="{{@asset('js/jquery-price-slider.js')}}"></script>
@@ -131,10 +125,19 @@
         <!-- main JS
         ============================================ -->
         <script src="{{@asset('js/main.js')}}"></script>
+
+           <!-- bootstrap JS
+           ============================================ -->
+           <script src="{{@asset('js/bootstrap.min.js')}}"></script>
+           <!-- wow JS
+           ============================================ -->
+           <script src="{{@asset('js/wow.min.js')}}"></script>
+
         <!-- tawk chat JS
         ============================================ -->
-        <script src="{{@asset('js/tawk-chat.js')}}"></script>
+        {{--<script src="{{@asset('js/tawk-chat.js')}}"></script>--}}
         <script src="{{@asset('js/style.js')}}"></script>
 
+                      </body>
 
-</html>
+            </html>

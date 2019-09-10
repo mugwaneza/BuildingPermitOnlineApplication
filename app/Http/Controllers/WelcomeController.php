@@ -126,29 +126,59 @@ class WelcomeController extends Controller
         return view('home');
     }
 
-    // Get to citizen application form
-    public function CitizenStatus(){
+    // Get to citizen application form and the status of application
+    public function CitizenStatus()
+    {
+
+
+        $myapplication = new Functions();
 
         //get citizen id by his session
-        $id = Session::get('citizensession');
+        $userid = Session::get('citizensession');
 
-         // get village applications of specific user
-        $villageapp = VillageApproval::where('applicant_id','=', $id)->get();
-           foreach($villageapp as $item ){
-               // track user application from village to the cell
-        $userChoosenProgram = CellApproval::with('VillageApproval')->where('village_id',$item['id'])->get();
+//        $grobal = $myapplication->globalFunction($userid);
+        $basic = $myapplication->basicFunction($userid);
 
-           }
-
-
-        if(!$id) {
+        // get applicant infomartion
+        $userInfo = Users::find($userid);
+        if(!$userid) {
             // when user has not logged in take him/her back to login page
             return redirect('/login');
         }
-        $userInfo = Users::find($id);
 
-        return view('citizen')-> with('userInfo',$userInfo)
-                                -> with('villageapp', $villageapp);
+//        $villageLevel = "Village";
+//        $cellLevel = "Cell";
+//        $sectorLevel = "Sector";
+
+        // get the status of village , cell and sector in order to know where application reaches
+//        $villageapproval = $results['vapproval'];
+//        $cellpproval = $results['capproval'];
+//        $sectorapproval = $results['sapproval'];
+//
+//
+//        if ($villageapproval == "pending" && $cellpproval == "" && $sectorapproval == "") {
+//            return view('citizen')
+//                ->with('Level', $villageLevel)
+//                ->with('results', $results);
+//        }elseif ($villageapproval == "pending" && $cellpproval == "pending" && $sectorapproval == "") {
+//                return view('citizen')
+//               ->with('Level', $cellLevel)
+//               ->with('results', $results);
+//
+//         }elseif($villageapproval !="" && $cellpproval !="" && $sectorapproval !=""){
+//            return view('citizen')
+//                -> with('sectorLevel',$sectorLevel)
+//                ->with('results',$results);
+//          }else{
+//            return view('citizen')
+//                ->with('results',$results)
+//                ->with('userInfo',$userInfo);
+//        }
+
+        return view('citizen')
+        ->with('basic',$basic)
+       ->with('userInfo',$userInfo);
+
     }
 
     // Get to citizen application form

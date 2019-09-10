@@ -62,10 +62,16 @@ class Functions extends Controller
         return $data;
     }
 
+//
+  public function basicFunction($userid){
+      $MyFunction = VillageApproval::with('UserApplicant','UserCoordinator')
+          -> where("applicant_id", $userid)
+          -> get() ;
+        return $MyFunction;
+  }
 
 
-
-    public function globalFunction(){
+    public function globalFunction($userid){
 
           // Jonins Users and Village
          $MyFunction = VillageApproval::with('UserApplicant','UserCoordinator')-> get() ;
@@ -76,16 +82,17 @@ class Functions extends Controller
      //  return $MyFunction2;
 
         // joins cell and  sector
-        $MyFunction3 = SectorApproval::with('Cell','SectorCoord')->where('approval_status','Active') -> get() ;
-       // return $MyFunction3;
+        $MyFunction3 = SectorApproval::with('Cell.Village.UserApplicant')-> get() ;
+//        return $MyFunction3;
 
 
         $data = DB::table('users')
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
             ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
             ->join('sectorapplication', 'cellapplication.id', '=', 'sectorapplication.cell_id')
-            ->select('users.*', 'villageapplication.*', 'cellapplication.*', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime')
-            -> get();
+            ->select('users.*','users.id as myid', 'villageapplication.*','villageapplication.id as vi','villageapplication.created_at as vtime','villageapplication.approval_status as vapproval', 'cellapplication.*','cellapplication.id as ci','cellapplication.approval_status as capproval', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime','sectorapplication.cell_id as scellid')
+            -> where("villageapplication.applicant_id",$userid)
+            -> paginate(8);
         return $data;
 
     }

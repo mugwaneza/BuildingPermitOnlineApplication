@@ -129,7 +129,7 @@ class AdministratorsController extends Controller
             $villageapplication = VillageApproval::find($id);
 
             $villageapplication -> coordinator_id = $coord_id;
-            $villageapplication -> approval_status = "permited";
+            $villageapplication -> approval_status = "approved";
             $villageapplication -> save();
             $request->session()->flash('success', 'Application has be approved approve and transfered');
             return redirect("/admin/new/applicant");
