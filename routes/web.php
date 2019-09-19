@@ -18,14 +18,15 @@ Route::get('/admin/dashboard', 'AdministratorsController@Welcome');
 Route::get('/admin/new/applicant', 'AdministratorsController@Myapplicants');
 Route::get('/register/admin', 'AdministratorsController@RegisterAdmin');
 Route::get('/all/admin', 'AdministratorsController@AllAdmin');
+Route::get('/admin/search/{search}', 'AdministratorsController@SearchAdmin');
 
 Route::post('/register/admin', 'AdministratorsController@CreateAdmin');
 Route::post('/admin/update', 'AdministratorsController@UpdateAdmin');
 Route::post('admin/delete', 'AdministratorsController@DeleteAdmin');
 Route::post('/admin/village/approval/{id}', 'AdministratorsController@ApproveVillageApplications');
 Route::post('/admin/cell/approval/{id}', 'AdministratorsController@ApproveCellApplications');
-Route::post('/admin/sector/approval/{id}', 'AdministratorsController@ApproveSectorApplications');
-Route::post('/admin/sector/reject/{id}', 'AdministratorsController@RejectSectorApplications');
+Route::post('/admin/sector/approval', 'AdministratorsController@ApproveSectorApplications');
+Route::post('/admin/sector/reject', 'AdministratorsController@RejectSectorApplications');
 
 //Main Home route
 Route::get('/', 'WelcomeController@Home');
@@ -43,7 +44,7 @@ Route::get('/citizen', 'WelcomeController@CitizenDashboard');
 Route::get('/citizen/satus', 'WelcomeController@CitizenStatus');
 
 // testing routes
-Route::get('/getapp', 'Functions@globalFunction');
+Route::get('/getapp', 'Test@Test');
 
 
 

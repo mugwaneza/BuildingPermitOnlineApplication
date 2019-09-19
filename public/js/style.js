@@ -57,6 +57,7 @@ $(".BtnDelete").click(function() {
 
 //Approve village application button
 $(".vApproveBtn").click(function() {
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -110,56 +111,34 @@ $(".cApproveBtn").click(function() {
 
 //Approve sector application button
 $(".ApproveBtn").click(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     var $row = $(this).closest("tr");    // Find the row
     var $tdId = $row.find(".sid").text(); // Find the text
     var  $id = $.trim($tdId);
-    $.ajax({
-        method: "POST",
-        url:"/admin/sector/approval/"+$id,
-        data: $id,
-        cache: false,
-        type: 'POST',
-       success:function(response){
-           window.location.reload();
-       },
-        error:function(response){
-            error:response;
-        }
-    } )
+    $("#commentid").val($id);
+    $("#commentDialog").modal('show');
 });
 
 //reject sector application button
 $(".RejectBtn").click(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
+
 
     var $row = $(this).closest("tr");    // Find the row
     var $tdId = $row.find(".sid").text(); // Find the text
     var  $id = $.trim($tdId);
-    $.ajax({
-        method: "POST",
-        url:"/admin/sector/reject/"+$id,
-        data: $id,
-        cache: false,
-        type: 'POST',
-       success:function(response){
-           window.location.reload();
-       },
-        error:function(response){
-            error:response;
-        }
-    } )
+    $("#commentid2").val($id);
+    $("#rejectModeldialog").modal('show');
+
 });
 
+//search function
+var textbox = document.getElementById("search");
+textbox.addEventListener("keypress", function onEvent(event) {
+    if (event.key === "Enter") {
+        var $search = $("#search").val();
+        window.location.href = "/admin/search/"+$search;
+    }});
 
 // Details button when is clicked
 
@@ -173,6 +152,7 @@ $(".btnDetails").click(function() {
     var $tdvillage= $row.find(".village").text(); // Find the text
     var $tdcell= $row.find(".cell").text(); // Find the text
     var $tdsector= $row.find(".sector").text(); // Find the text
+    var $tdcomment= $row.find(".scomment").text(); // Find the text
 
     $('#namedial').val($.trim($tdname));
     $('#emaildial').val($.trim($tdemail));
@@ -180,6 +160,8 @@ $(".btnDetails").click(function() {
     $('#villagedial').val($.trim($tdvillage));
     $('#celldial').val($.trim($tdcell));
     $('#sectordial').val($.trim($tdsector));
+    $('#commentsdialog').html("");
+    $('#commentsdialog').append($.trim($tdcomment));
 
     $("#DetailModel").modal('show');
 

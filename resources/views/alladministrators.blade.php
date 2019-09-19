@@ -3,10 +3,23 @@
     <div class="analytics-sparkle-area">
         <div class="container-fluid dasboardcontainer">
             <div class="product-tab-list tab-pane fade active in" id="description">
+
+
+
                 <div class="row">
+
+
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="review-content-section main-container-admin mt-5">
+                        <div class="searchdiv" style="margin-top: 5%">
+                        <div class="form-group col-md-6 col-md-offset-2 " >
+                    <input class="form-control" type="text" name="search" id="search" placeholder="search by name, role or nid" required>
+                        </div>
+                            </div><br>
+
+
+                        <div class="review-content-section main-container-admin ">
                             <div id="dropzone1" class="pro-ad">
+
                                 <br><h3 class="col-md-offset-2 "> All system authorities accounts and their roles</h3><br>
         <table class="table table-hover table-bordered table-striped">
             <div class="center-block">@include('error_message')</div>
@@ -19,7 +32,7 @@
             <th>Village</th>
             <th>Cell</th>
             <th>Sector</th>
-            <th>Created at</th>
+            {{--<th>time</th>--}}
             <th>Edit</th>
             <th>Delete</th>
             </thead>
@@ -36,7 +49,7 @@
                  <td class="cell">{{$user["cell"]}}</td>
                  <td class="village">{{$user["village"]}}</td>
                  <td class="sector">{{$user["sector"]}}</td>
-                 <td class="ceatedat">{{$user["created_at"]->format('d-m-Y')}}</td>
+                 {{--<td class="ceatedat">{{$user["created_at"]->format('d-m-Y')}}</td>--}}
                  <td>
                  <button class="btn btn-primary btn-sm BtnEdit" data-toggle="modal" > Edit </button>
 
@@ -45,11 +58,15 @@
              </tr>
              <?php $count ++ ; ?>
              @endforeach
-
              </tbody>
-
-        </table>
-        </div>
+         </table>
+             <div class="row " >
+                <div class="myfooter offset-2" >
+                    {{--show pagination--}}
+                    {{$administrators -> links() }}
+                </div>
+             </div>
+    </div>
         </div>
         </div>
         </div>
@@ -106,7 +123,7 @@
                                     <select class="form-control" id="roledial" name="role">
                                         <option value="{{old('role')}}"></option>
                                         <option value="Village coordinator">Village coordinator</option>
-                                        <option value="Cell coorditor">Cell coordinator</option>
+                                        <option value="Cell coordinator">Cell coordinator</option>
                                         <option value="Land manager">Land manager</option>
                                     </select>
                                     <small class="text-danger">{{ $errors->first('role') }}</small>

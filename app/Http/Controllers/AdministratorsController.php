@@ -62,13 +62,29 @@ class AdministratorsController extends Controller
 
         $id = Session::get('citizensession');
         $userInfo = Users::find($id);
-
         // get the list of all users
-        $administrators = Users::where('role', '!=', 'citizen') -> get();
+        $administrators = Users::where('role', '!=', 'citizen') -> paginate(4);
          return view('alladministrators')
              -> with("administrators", $administrators)
              -> with('userInfo',$userInfo);
     }
+
+    public function SearchAdmin($search ){
+        $id = Session::get('citizensession');
+        $userInfo = Users::find($id);
+
+        $administrators = Users::where('role', '!=', 'citizen')
+         ->where('name','like','%'.$search.'%')
+         ->orWhere('nid','like','%'.$search.'%')
+         ->orWhere('role','like','%'.$search.'%')
+         -> paginate(4);
+        return view('alladministrators')
+            -> with("administrators", $administrators)
+            -> with('userInfo',$userInfo);
+    }
+
+
+
 
 
 
@@ -161,31 +177,36 @@ class AdministratorsController extends Controller
 
 
     // Approve Sector  pendind application
-    public function ApproveSectorApplications(Request $request, $id){
+    public function ApproveSectorApplications(Request $request){
         $landmanger_id = Session::get('citizensession');
+
+         $id = $request -> commentid;
+         $mycomment = $request -> comment;
         $sectorapplicant = SectorApproval::find($id);
 
         $sectorapplicant-> approval_status = 'permited';
         $sectorapplicant-> landmanager_id = $landmanger_id;
-        $sectorapplicant-> feeback = 'Congraturations, your application was granted, you may come to the office for official stamp';
+        $sectorapplicant-> feeback = $mycomment;
         $sectorapplicant->save();
 
-        $request->session()->flash('success', 'Application has be approved approve and transfered');
+        $request->session()->flash('success', 'Application has been approved approve and transfered');
             return redirect("/admin/new/applicant");
 
     }
 
     // Approve Sector  pendind application reject
-    public function RejectSectorApplications(Request $request, $id){
+    public function RejectSectorApplications(Request $request){
         $landmanger_id = Session::get('citizensession');
+        $id = $request -> commentid2;
+        $mycomment = $request -> comment;
         $sectorapplicant = SectorApproval::find($id);
 
         $sectorapplicant-> approval_status = 'rejected';
         $sectorapplicant-> landmanager_id = $landmanger_id;
-        $sectorapplicant-> feeback = 'Sorry, your application was rejected, for more details  come to the land manager office';
+        $sectorapplicant-> feeback = $mycomment;
         $sectorapplicant->save();
 
-        $request->session()->flash('success', 'Application has be approved approve and transfered');
+        $request->session()->flash('error', 'Application has been rejected successfully ');
             return redirect("/admin/new/applicant");
 
     }
@@ -209,7 +230,7 @@ class AdministratorsController extends Controller
             return view('admin_newapplicants')
                   -> with("applicant", $applicant)
                   -> with('userInfo',$userInfo);
-         }else if(($userInfo['role'])=="Cell coorditor"){
+         }else if(($userInfo['role'])=="Cell coordinator"){
             // fetch cell application
 
              $adminCell = $userInfo['cell'];

@@ -20,6 +20,7 @@ class CreateVillageApprovalsTable extends Migration
             $table->unsignedInteger('coordinator_id')->nullable();
             $table->string('reason');
             $table->string('landcertificate');
+            $table->string('blueprint');
             $table->string('approval_status');
             $table->rememberToken();
             $table->timestamps();

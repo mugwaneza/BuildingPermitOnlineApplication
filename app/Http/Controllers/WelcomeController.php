@@ -130,14 +130,14 @@ class WelcomeController extends Controller
     public function CitizenStatus()
     {
 
-
         $myapplication = new Functions();
 
         //get citizen id by his session
         $userid = Session::get('citizensession');
 
-//        $grobal = $myapplication->globalFunction($userid);
-        $basic = $myapplication->basicFunction($userid);
+        $uvillage = $myapplication->uvFunction($userid);
+        $uvcell = $myapplication->uvcFunction();
+        $uvcsector = $myapplication->uvcFunction();
 
         // get applicant infomartion
         $userInfo = Users::find($userid);
@@ -146,37 +146,11 @@ class WelcomeController extends Controller
             return redirect('/login');
         }
 
-//        $villageLevel = "Village";
-//        $cellLevel = "Cell";
-//        $sectorLevel = "Sector";
-
-        // get the status of village , cell and sector in order to know where application reaches
-//        $villageapproval = $results['vapproval'];
-//        $cellpproval = $results['capproval'];
-//        $sectorapproval = $results['sapproval'];
-//
-//
-//        if ($villageapproval == "pending" && $cellpproval == "" && $sectorapproval == "") {
-//            return view('citizen')
-//                ->with('Level', $villageLevel)
-//                ->with('results', $results);
-//        }elseif ($villageapproval == "pending" && $cellpproval == "pending" && $sectorapproval == "") {
-//                return view('citizen')
-//               ->with('Level', $cellLevel)
-//               ->with('results', $results);
-//
-//         }elseif($villageapproval !="" && $cellpproval !="" && $sectorapproval !=""){
-//            return view('citizen')
-//                -> with('sectorLevel',$sectorLevel)
-//                ->with('results',$results);
-//          }else{
-//            return view('citizen')
-//                ->with('results',$results)
-//                ->with('userInfo',$userInfo);
-//        }
 
         return view('citizen')
-        ->with('basic',$basic)
+        ->with('uvillage',$uvillage)
+        ->with('uvcell',$uvcell)
+        ->with('uvcsector',$uvcsector)
        ->with('userInfo',$userInfo);
 
     }
@@ -202,6 +176,7 @@ class WelcomeController extends Controller
         $rules = [
             'reason' => 'required|min:10',
             'landcertificate' => 'required|mimes:pdf,jpeg,png,jpg|max:500',
+            'blueprint' => 'required|mimes:pdf,jpeg,png,jpg|max:500',
 
         ];
         $this->validate($request, $rules);
@@ -213,12 +188,18 @@ class WelcomeController extends Controller
         $village->approval_status = 'pending';
 
         $certificate = $request->file('landcertificate');
-        echo $certificate;
         $certificatename = time() . '_' . $request->file('landcertificate') -> getClientOriginalName();
         $certificate->move(public_path() . $FilesPath, $certificatename);
         $certificatePath = $FilesPath . $certificatename;
 
         $village->landcertificate = $certificatePath;
+
+        $blueprint = $request->file('blueprint');
+        $blueprintname = time() . '_' . $request->file('blueprint') -> getClientOriginalName();
+        $blueprint->move(public_path() . $FilesPath, $blueprintname);
+        $blueprintPath = $FilesPath . $blueprintname;
+
+        $village->blueprint = $blueprintPath;
         $request->session()->flash('success', 'Your application was successfully sent');
 
         $village->save();

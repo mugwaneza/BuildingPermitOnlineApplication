@@ -32,7 +32,7 @@ class Functions extends Controller
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
             ->select('users.*','villageapplication.reason','villageapplication.id as vid','villageapplication.landcertificate', 'villageapplication.approval_status as vapproval','villageapplication.created_at as vtime')
             ->where('users.village', $adminVillage)
-            ->paginate(6);
+            ->paginate(4);
         return $data;
     }
 
@@ -44,7 +44,7 @@ class Functions extends Controller
             ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
             ->select('users.*', 'villageapplication.*','cellapplication.id as cid', 'cellapplication.approval_status as capproval','cellapplication.created_at as ctime')
             ->where('users.cell', $adminCell)
-            -> paginate(6);
+            -> paginate(4);
         return $data;
     }
 
@@ -56,44 +56,36 @@ class Functions extends Controller
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
             ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
             ->join('sectorapplication', 'cellapplication.id', '=', 'sectorapplication.cell_id')
-            ->select('users.*', 'villageapplication.*', 'cellapplication.*','sectorapplication.id as sid', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime')
+            ->select('users.*', 'villageapplication.*', 'cellapplication.*','sectorapplication.id as sid','sectorapplication.feeback as scomment', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime')
             ->where('users.sector', $adminSector)
-            -> paginate(8);
+            -> paginate(4);
         return $data;
     }
 
 //
-  public function basicFunction($userid){
-      $MyFunction = VillageApproval::with('UserApplicant','UserCoordinator')
-          -> where("applicant_id", $userid)
-          -> get() ;
-        return $MyFunction;
+  public function uvFunction($userid){
+
+      // Jonins Users and Village
+      $uvillage = VillageApproval::with('UserApplicant')
+          -> where("applicant_id",$userid)
+          -> paginate(4);
+      return $uvillage;
+  }
+
+    public function uvcFunction(){
+
+        // joins user ,Village and cell
+        $uvcell = CellApproval::with('Village.UserApplicant')
+        -> get();
+          return $uvcell;
   }
 
 
-    public function globalFunction($userid){
-
-          // Jonins Users and Village
-         $MyFunction = VillageApproval::with('UserApplicant','UserCoordinator')-> get() ;
-//        return $MyFunction;
-
-          // joins Village and cell
-        $MyFunction2 = CellApproval::with('Village')-> get() ;
-     //  return $MyFunction2;
-
-        // joins cell and  sector
-        $MyFunction3 = SectorApproval::with('Cell.Village.UserApplicant')-> get() ;
-//        return $MyFunction3;
-
-
-        $data = DB::table('users')
-            ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
-            ->join('cellapplication', 'villageapplication.id', '=', 'cellapplication.village_id')
-            ->join('sectorapplication', 'cellapplication.id', '=', 'sectorapplication.cell_id')
-            ->select('users.*','users.id as myid', 'villageapplication.*','villageapplication.id as vi','villageapplication.created_at as vtime','villageapplication.approval_status as vapproval', 'cellapplication.*','cellapplication.id as ci','cellapplication.approval_status as capproval', 'sectorapplication.approval_status as sapproval','sectorapplication.created_at as stime','sectorapplication.cell_id as scellid')
-            -> where("villageapplication.applicant_id",$userid)
-            -> paginate(8);
-        return $data;
+    public function uvcsFunction(){
+        // joins users , village ,cell and  sector
+        $uvcsector = SectorApproval::with('Cell.Village.UserApplicant')
+        -> get();
+        return $uvcsector;
 
     }
 

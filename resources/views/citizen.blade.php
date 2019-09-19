@@ -11,58 +11,95 @@
                         <div class="review-content-section">
                             <div id="dropzone1" class="pro-ad">
                                 <br><h3 class="col-md-offset-2 " style="margin-top: 50px;">Personal applications</h3><br>
-                                @if($basic -> count()>0)
+                                @if($uvillage -> count()>0)
 
                                 <table class="table table table-responsive table-bordered table-hover table-striped">
                                     <thead>
                                         <th>No</th>
                                         <th>Application reason</th>
-                                        <th>File</th>
+                                        <th>Land paper</th>
+                                        <th>blueprint</th>
                                         <th>Application status</th>
-                                        {{--<th>Application level</th>--}}
+                                        <th>Application level</th>
                                         <th>Time</th>
-                                        {{--<th>Edit</th>--}}
-                                        {{--<th>View</th>--}}
+                                        <th>Edit</th>
+                                        <th>View</th>
                                     </thead>
                                     <tbody>
                                        <?php $count = 0 ?>
-                                    @foreach($basic as $vapp)
+                                    @foreach($uvillage as $uvi)
                                         <?php $count++ ?>
                                     <tr>
                                         <td> <?php echo $count  ?></td>
-                                        <td>{{$vapp -> reason}}</td>
+                                        <td>{{$uvi -> reason}}</td>
                                         <td>
                                             <button type="button" class="btn btn-md btn-default" >
                                                 <span class="fa fa-clipboard "></span> </a>
-                                                <a href="{{$vapp -> landcertificate}}" download>
-                                                    <span class="fa fa-download "></span> </a>
+                                                <a href="{{$uvi -> landcertificate}}" download>
+                                                    <span class="fa fa-download text-warning"></span> </a>
                                             </button>
                                         </td>
+                                       <td>
+                                        <button type="button" class="btn btn-md btn-default" >
+                                            <span class="fa fa-clipboard "></span> </a>
+                                            <a href="{{$uvi -> blueprint}}" download>
+                                                <span class="fa fa-download text-success"></span> </a>
+                                        </button>
+                                    </td>
 
-                                        <td><span class="text-warning">{{$vapp -> approval_status}}</span></td>
+                                        @if($uvcsector->count()>0)
 
-                                        <td>{{$vapp -> created_at}}</td>
+                                        @foreach ($uvcsector -> where('applicant_id',Session::get('citizensession')) as $uvcs)
+                                            {{--@foreach ($uvcsector as $uvcs)--}}
 
-                                        {{--<td>--}}
-                                            {{--@if( $vapp->vapproval !="pending")--}}
-                                            {{--<button class="btn btn-primary btn-sm disabled">Edit</button>--}}
-                                                {{--@else--}}
-                                                {{--<button class="btn btn-primary btn-sm">Edit</button>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
-                                        {{--<td>--}}
-                                            {{--@if( $vapp -> vapproval!="pending")--}}
-                                            {{--<button class="btn btn-info btn-sm">Details</button>--}}
-                                                {{--@else--}}
-                                                {{--<button class="btn btn-info btn-sm disabled">Details</button>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
+                                            <td><span class="text-warning">{{$uvcs -> Cell -> approval_status}}</span></td>
+                                            <td><span class="text-warning">Sector</span></td>
+                                            @endforeach
+                                            @else
+
+                                            @if($uvcell -> count()>0)
+
+                                            @foreach ($uvcell->Village -> UserApplicant -> where('applicant_id',Session::get('citizensession')) as $uvc)
+                                                <td><span class="text-warning">{{$uvc -> approval_status}}</span></td>
+                                                <td><span class="text-warning">Cell</span></td>
+                                            @endforeach
+                                                @else
+                                                <td><span class="text-warning">{{$uvi -> approval_status}}</span></td>
+                                                <td><span class="text-warning">village</span></td>
+                                             @endif
+
+                                        @endif
+
+
+                                        <td>{{$uvi -> created_at}}</td>
+
+                                        <td>
+                                            @if($uvi->approval_status !="pending")
+                                               <button class="btn btn-primary btn-sm disabled">Edit</button>
+                                             @else
+                                                <button class="btn btn-primary btn-sm">Edit</button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if( $uvi -> approval_status !="pending")
+                                            <button class="btn btn-info btn-sm">Details</button>
+                                                @else
+                                                <button class="btn btn-info btn-sm disabled">Details</button>
+                                            @endif
+                                        </td>
 
                                     </tr>
                                     @endforeach
 
                                     </tbody>
                                 </table>
+                                    <div class="row " >
+                                        <div class="myfooter offset-2" >
+                                            {{--show pagination--}}
+                                            {{$uvillage -> links() }}
+                                        </div>
+
+                                    </div>
                                 @else
                                     <p class="col-md-offset-2 mt-5">Sorry ! you have no available application this time</p>
                                 @endif

@@ -38,6 +38,11 @@
                                             <input type="file" name="landcertificate"  class="form-control "  id="landcertificate" value="{{ old('landcertificate') }}" >
                                             <small class="text-danger">{{ $errors->first('landcertificate') }}</small>
                                         </div>
+                                    <div class="form-group {{ $errors->has('blueprint') ? ' has-error' : '' }}">
+                                    <label class=""><span class="fa fa-download"></span>  upload blueprint </label>
+                                    <input type="file" name="blueprint"  class="form-control "  id="blueprint" value="{{ old('blueprint') }}" >
+                                    <small class="text-danger">{{ $errors->first('blueprint') }}</small>
+                                </div>
 
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

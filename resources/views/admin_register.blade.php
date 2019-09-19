@@ -47,7 +47,7 @@
                                 <select class="form-control" name="role" id="role">
                                     <option value="{{old('role')}}"></option>
                                     <option value="Village coordinator">Village coordinator</option>
-                                    <option value="Cell coorditor">Cell coordinator</option>
+                                    <option value="Cell coordinator">Cell coordinator</option>
                                     <option value="Land manager">Land manager</option>
                                     </select>
                                 <small class="text-danger">{{ $errors->first('role') }}</small>
