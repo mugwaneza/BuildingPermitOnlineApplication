@@ -20,10 +20,10 @@
                                         <th>Land paper</th>
                                         <th>blueprint</th>
                                         <th>Application status</th>
-                                        <th>Application level</th>
+                                        {{--<th>Application level</th>--}}
                                         <th>Time</th>
-                                        <th>Edit</th>
-                                        <th>View</th>
+                                        {{--<th>Edit</th>--}}
+                                        {{--<th>View</th>--}}
                                     </thead>
                                     <tbody>
                                        <?php $count = 0 ?>
@@ -47,15 +47,16 @@
                                         </button>
                                     </td>
 
-                                        @if($uvcsector->count()>0)
+{{--                                          @if($uvcsector->count()>0)
 
-                                        @foreach ($uvcsector -> where('applicant_id',Session::get('citizensession')) as $uvcs)
-                                            {{--@foreach ($uvcsector as $uvcs)--}}
-
-                                            <td><span class="text-warning">{{$uvcs -> Cell -> approval_status}}</span></td>
+--}}{{--                                        @foreach ($uvcsector -> where('applicant_id',Session::get('citizensession')) as $uvcs)--}}{{--
+                                             @foreach ($uvcsector -> where($uvi-> applicant_id,Session::get('citizensession')) as $uvcs)
+                                            <td><span class="text-warning">{{$uvcs -> approval_status}}</span></td>
+--}}{{--                                            <td><span class="text-warning">{{$uvcs -> Cell -> approval_status}}</span></td>--}}{{--
                                             <td><span class="text-warning">Sector</span></td>
                                             @endforeach
-                                            @else
+
+                                          @else
 
                                             @if($uvcell -> count()>0)
 
@@ -68,25 +69,27 @@
                                                 <td><span class="text-warning">village</span></td>
                                              @endif
 
+
+
+                                        @endif--}}
+
+                                         @if($uvi -> approval_status =="permited" || $uvi -> approval_status =="approved")
+                                        <td><span class="text-success">{{$uvi -> approval_status}}</span></td>
+                                         @else
+                                            <td><span class="text-warning">{{$uvi -> approval_status}}</span></td>
+
                                         @endif
-
-
                                         <td>{{$uvi -> created_at}}</td>
 
-                                        <td>
-                                            @if($uvi->approval_status !="pending")
-                                               <button class="btn btn-primary btn-sm disabled">Edit</button>
-                                             @else
-                                                <button class="btn btn-primary btn-sm">Edit</button>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if( $uvi -> approval_status !="pending")
-                                            <button class="btn btn-info btn-sm">Details</button>
-                                                @else
-                                                <button class="btn btn-info btn-sm disabled">Details</button>
-                                            @endif
-                                        </td>
+                                        {{--<td>--}}
+                                            {{--@if($uvi->approval_status !="pending")--}}
+                                                {{--<button class="btn btn-primary btn-sm disabled">Edit</button>--}}
+                                            {{--@else--}}
+                                                {{--<button class="btn btn-primary btn-sm">Edit</button>--}}
+                                            {{--@endif--}}
+                                        {{--</td>--}}
+
+
 
                                     </tr>
                                     @endforeach

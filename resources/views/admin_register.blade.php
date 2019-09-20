@@ -4,7 +4,7 @@
 <div class="error-pagewrap">
     <div class="error-page-int">
         <div class="text-center custom-login">
-            <h3 class="text-danger">Electronic Building Permit Online Application</h3>
+            <h3 class="text-danger">Online Building Permit Application</h3>
             <p>Admnistrators registration form</p>
         </div>
         <div class="content-error">

@@ -225,7 +225,7 @@ class AdministratorsController extends Controller
            // fetch all village applications
             $adminVillage = $userInfo['village'];
             $applicant = $function ->VillageApplication($adminVillage);
-            $request->session()->flash('village', 'Village application (s))');
+            $request->session()->flash('village', 'Village application (s)');
 
             return view('admin_newapplicants')
                   -> with("applicant", $applicant)
@@ -235,7 +235,7 @@ class AdministratorsController extends Controller
 
              $adminCell = $userInfo['cell'];
             $applicant = $function ->CellApplication($adminCell);
-            $request->session()->flash('cell', 'Cell application (s))');
+            $request->session()->flash('cell', 'Cell application (s)');
             return view('admin_newapplicants')
                 ->with("applicant", $applicant)
                 -> with('userInfo',$userInfo);

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer-copy-right">
-                    <p>Copyright © 2018. All rights reserved. Electronic Building Permit <a href="/">Online Application</a></p>
+                    <p>Copyright © 2018. All rights reserved. Online Building Permit <a href="/">Application</a></p>
                 </div>
             </div>
         </div>

@@ -116,7 +116,7 @@
 
                                             @endif
                                             <td>
-                                                <button class="btn btn-info btn-sm btnDetails">Details</button>
+                                                <button class="btn btn-info btn-sm btnDetails" id="btnDetails">Details</button>
                                              <td>
                                                 @if(session('sector') && ($vapp -> sapproval) =="pending")
                                                     <button class="btn btn-success btn-sm ApproveBtn" >Approve</button>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>BPOA</title>
+        <title>OBPA</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon
@@ -42,9 +42,7 @@
         <!-- morrisjs CSS
             ============================================ -->
         <link rel="stylesheet" href="{{@asset('css/morrisjs/morris.css')}}">
-        <!-- mCustomScrollbar CSS
-            ============================================ -->
-        <link rel="stylesheet" href="{{@asset('css/scrollbar/jquery.mCustomScrollbar.min.css')}}">
+
         <!-- metisMenu CSS
             ============================================ -->
         <link rel="stylesheet" href="{{@asset('css/metisMenu/metisMenu.min.css')}}">
@@ -98,7 +96,7 @@
         <script src="{{@asset('js/counterup/counterup-active.js')}}"></script>
         <!-- mCustomScrollbar JS
         ============================================ -->
-        <script src="{{@asset('js/scrollbar/jquery.mCustomScrollbar.concat.min.js')}}')}}"></script>
+        <script src="{{@asset('js/scrollbar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
         <script src="{{@asset('js/scrollbar/mCustomScrollbar-active.js')}}"></script>
         <!-- metisMenu JS
         ============================================ -->
@@ -108,7 +106,6 @@
         ============================================ -->
         <script src="{{@asset('js/morrisjs/raphael-min.js')}}"></script>
         <script src="{{@asset('js/morrisjs/morris.js')}}"></script>
-        <script src="{{@asset('js/morrijs/morris-active.js')}}"></script>
         <!-- morrisjs JS
         ============================================ -->
         <script src="{{@asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -119,12 +116,8 @@
         <script src="{{@asset('js/calendar/moment.min.js')}}"></script>
         <script src="{{@asset('js/calendar/fullcalendar.min.js')}}"></script>
         <script src="{{@asset('js/calendar/fullcalendar-active.js')}}"></script>
-        <!-- plugins JS
-        ============================================ -->
-        <script src="{{@asset('js/plugins.js')}}"></script>
-        <!-- main JS
-        ============================================ -->
-        <script src="{{@asset('js/main.js')}}"></script>
+
+
 
            <!-- bootstrap JS
            ============================================ -->
