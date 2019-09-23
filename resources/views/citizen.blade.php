@@ -73,78 +73,86 @@
                                             @if($uvcell -> count()>0)
 
                                  <?php $count++ ?>
-                                   <tr>
+
+                                 @foreach ($uvcell as $uvc )
+
+                                     <tr>
                                     <td> <?php echo $count  ?></td>
-                                    <td>{{$uvcell  -> Village -> reason}}</td>
+                                    <td>{{$uvc  -> Village -> reason}}</td>
 
                                     <td><button type="button" class="btn btn-md btn-default" >
                                             <span class="fa fa-clipboard "></span> </a>
-                                            <a href="{{$uvcell -> Village -> landcertificate}}" download>
+                                            <a href="{{$uvc -> Village -> landcertificate}}" download>
                                                 <span class="fa fa-download text-warning"></span> </a>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-md btn-default" >
                                             <span class="fa fa-clipboard "></span> </a>
-                                            <a href="{{$uvcell  -> Village ->blueprint}}" download>
+                                            <a href="{{$uvc  -> Village ->blueprint}}" download>
                                                 <span class="fa fa-download text-success"></span> </a>
                                         </button>
                                     </td>
 
-                                    @if($uvcell -> approval_status =="permited" || $uvcell -> approval_status =="approved")
-                                        <td><span class="text-success">{{$uvcell -> approval_status}}</span></td>
+                                    @if($uvc -> approval_status =="permited" || $uvc -> approval_status =="approved")
+                                        <td><span class="text-success">{{$uvc -> approval_status}}</span></td>
                                         <td class="text-success">Waiting ..</td>
 
-                                    @elseif($uvcell -> approval_status =="rejected")
-                                        <td><span class="text-danger">{{$uvcell -> approval_status}}</span></td>
+                                    @elseif($uvc -> approval_status =="rejected")
+                                        <td><span class="text-danger">{{$uvc -> approval_status}}</span></td>
                                         <td class="text-danger">Waiting ..</td>
 
                                     @else
-                                        <td><span class="text-warning">{{$uvcell -> approval_status}}</span></td>
+                                        <td><span class="text-warning">{{$uvc -> approval_status}}</span></td>
                                         <td class="text-warning">Waiting ..</td>
                                     @endif
 
                                     <td><span class="text-warning">Cell</span></td>
-                                    <td>{{$uvcs -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+                                    <td>{{$uvc -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
                                 </tr>
+                                     @endforeach
                                            @else
                                                 @if($uvillage -> count()>0)
 
                                                     <?php $count++ ?>
+
+                                                    @foreach($uvillage as $uv)
                                                     <tr>
                                                         <td> <?php echo $count  ?></td>
-                                                        <td>{{$uvillage -> reason}}</td>
+                                                        <td>{{$uv -> reason}}</td>
 
                                                         <td><button type="button" class="btn btn-md btn-default" >
                                                                 <span class="fa fa-clipboard "></span> </a>
-                                                                <a href="{{$uvillage -> landcertificate}}" download>
+                                                                <a href="{{$uv -> landcertificate}}" download>
                                                                     <span class="fa fa-download text-warning"></span> </a>
                                                             </button>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-md btn-default" >
                                                                 <span class="fa fa-clipboard "></span> </a>
-                                                                <a href="{{$uvillage ->blueprint}}" download>
+                                                                <a href="{{$uv ->blueprint}}" download>
                                                                     <span class="fa fa-download text-success"></span> </a>
                                                             </button>
                                                         </td>
 
-                                                        @if($uvillage -> approval_status =="permited" || $uvillage -> approval_status =="approved")
-                                                            <td><span class="text-success">{{$uvillage -> approval_status}}</span></td>
+                                                        @if($uv > approval_status =="permited" || $uv -> approval_status =="approved")
+                                                            <td><span class="text-success">{{$uv -> approval_status}}</span></td>
                                                             <td class="text-success">Waiting ..</td>
 
-                                                        @elseif($uvillage -> approval_status =="rejected")
-                                                            <td><span class="text-danger">{{$uvillage -> approval_status}}</span></td>
+                                                        @elseif($uv -> approval_status =="rejected")
+                                                            <td><span class="text-danger">{{$uv -> approval_status}}</span></td>
                                                             <td class="text-danger">Waiting ..</td>
 
                                                         @else
-                                                            <td><span class="text-warning">{{$uvillage -> approval_status}}</span></td>
+                                                            <td><span class="text-warning">{{$uv -> approval_status}}</span></td>
                                                             <td class="text-warning">Waiting ..</td>
                                                         @endif
 
                                                         <td><span class="text-warning">Cell</span></td>
-                                                        <td>{{$uvillage -> Cell -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+                                                        <td>{{$uv -> created_at ->format('d-m-Y')}}</td>
                                                     </tr>
+                                                    @endforeach
+
                                                     @endif
                                                @endif
                                          @endif
@@ -154,7 +162,7 @@
                                     <div class="row " >
                                         <div class="myfooter offset-2" >
                                             {{--show pagination--}}
-                                            {{--{{$uvillage -> links() }}--}}
+                                            {{$uvillage -> links() }}
                                         </div>
 
                                     </div>
