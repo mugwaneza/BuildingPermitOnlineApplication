@@ -46,8 +46,8 @@
                  <td class="nid">{{$user["nid"]}}</td>
                  <td class="email">{{$user["email"]}}</td>
                  <td class="role" >{{$user["role"]}}</td>
-                 <td class="cell">{{$user["cell"]}}</td>
-                 <td class="village">{{$user["village"]}}</td>
+                 <td class="cell">{{$user["village"]}}</td>
+                 <td class="village">{{$user["cell"]}}</td>
                  <td class="sector">{{$user["sector"]}}</td>
                  {{--<td class="ceatedat">{{$user["created_at"]->format('d-m-Y')}}</td>--}}
                  <td>
