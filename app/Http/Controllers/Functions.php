@@ -30,7 +30,7 @@ class Functions extends Controller
         // Querry to join users , Village
         $data = DB::table('users')
             ->join('villageapplication', 'users.id', '=', 'villageapplication.applicant_id')
-            ->select('users.*','villageapplication.reason','villageapplication.id as vid','villageapplication.landcertificate', 'villageapplication.approval_status as vapproval','villageapplication.created_at as vtime')
+            ->select('users.*','villageapplication.reason','villageapplication.id as vid','villageapplication.landcertificate','villageapplication.blueprint', 'villageapplication.approval_status as vapproval','villageapplication.created_at as vtime')
             ->where('users.village', $adminVillage)
             ->paginate(4);
         return $data;

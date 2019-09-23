@@ -135,7 +135,7 @@
                                                             </button>
                                                         </td>
 
-                                                        @if($uv > approval_status =="permited" || $uv -> approval_status =="approved")
+                                                        @if($uv -> approval_status =="permited" || $uv -> approval_status =="approved")
                                                             <td><span class="text-success">{{$uv -> approval_status}}</span></td>
                                                             <td class="text-success">Waiting ..</td>
 
@@ -148,7 +148,7 @@
                                                             <td class="text-warning">Waiting ..</td>
                                                         @endif
 
-                                                        <td><span class="text-warning">Cell</span></td>
+                                                        <td><span class="text-warning">Village</span></td>
                                                         <td>{{$uv -> created_at ->format('d-m-Y')}}</td>
                                                     </tr>
                                                     @endforeach
