@@ -9,97 +9,152 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="review-content-section">
-                            <div id="dropzone1" class="pro-ad">
+                            <div id="dropzone1" class="pro-ad  col-md-10 ">
                                 <br><h3 class="col-md-offset-2 " style="margin-top: 50px;">Personal applications</h3><br>
-                                @if($uvillage -> count()>0)
+                                @if($uvillage -> count()>0 || $uvcsector->count()>0 ||$uvcell ->count()>0 )
 
-                                <table class="table table table-responsive table-bordered table-hover table-striped">
+                                 <table class="table table-responsive table-bordered table-hover table-striped col-md-offset-2">
                                     <thead>
                                         <th>No</th>
-                                        <th>Application reason</th>
-                                        <th>Land paper</th>
-                                        <th>blueprint</th>
-                                        <th>Application status</th>
-                                        {{--<th>Application level</th>--}}
-                                        <th>Time</th>
-                                        {{--<th>Edit</th>--}}
-                                        {{--<th>View</th>--}}
+                                        <th>Reason</th>
+                                        <th>Land Certificate</th>
+                                        <th>Blueprint</th>
+                                        <th>Status</th>
+                                        <th>Feedback</th>
+                                        <th>Level</th>
+                                        <th>Created on</th>
                                     </thead>
                                     <tbody>
                                        <?php $count = 0 ?>
-                                    @foreach($uvillage as $uvi)
+
+
+                                        @if($uvcsector->count()>0)
+                                            @foreach ($uvcsector as $uvcs )
+
                                         <?php $count++ ?>
                                     <tr>
                                         <td> <?php echo $count  ?></td>
-                                        <td>{{$uvi -> reason}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-md btn-default" >
+                                        <td>{{$uvcs -> Cell -> Village -> reason}}</td>
+
+                                        <td><button type="button" class="btn btn-md btn-default" >
                                                 <span class="fa fa-clipboard "></span> </a>
-                                                <a href="{{$uvi -> landcertificate}}" download>
+                                                <a href="{{$uvcs -> Cell -> Village -> landcertificate}}" download>
                                                     <span class="fa fa-download text-warning"></span> </a>
                                             </button>
                                         </td>
                                        <td>
                                         <button type="button" class="btn btn-md btn-default" >
                                             <span class="fa fa-clipboard "></span> </a>
-                                            <a href="{{$uvi -> blueprint}}" download>
+                                            <a href="{{$uvcs -> Cell -> Village ->blueprint}}" download>
+                                                <span class="fa fa-download text-success"></span> </a>
+                                        </button>
+                                       </td>
+
+                                         @if($uvcs -> approval_status =="permited" || $uvcs -> approval_status =="approved")
+                                        <td><span class="text-success">{{$uvcs -> approval_status}}</span></td>
+                                        <td class="text-success">{{$uvcs -> feeback}}</td>
+
+                                        @elseif($uvcs -> approval_status =="rejected")
+                                         <td><span class="text-danger">{{$uvcs -> approval_status}}</span></td>
+                                            <td class="text-danger">{{$uvcs -> feeback}}</td>
+
+                                        @else
+                                         <td><span class="text-warning">{{$uvcs -> approval_status}}</span></td>
+                                            <td class="text-warning">{{$uvcs -> feeback}}</td>
+                                        @endif
+
+                                            <td><span class="text-warning">Sector</span></td>
+                                            <td>{{$uvcs -> Cell -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+
+                                    </tr>
+                                    @endforeach
+                                      @else
+
+                                            @if($uvcell -> count()>0)
+
+                                 <?php $count++ ?>
+                                   <tr>
+                                    <td> <?php echo $count  ?></td>
+                                    <td>{{$uvcell  -> Village -> reason}}</td>
+
+                                    <td><button type="button" class="btn btn-md btn-default" >
+                                            <span class="fa fa-clipboard "></span> </a>
+                                            <a href="{{$uvcell -> Village -> landcertificate}}" download>
+                                                <span class="fa fa-download text-warning"></span> </a>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-md btn-default" >
+                                            <span class="fa fa-clipboard "></span> </a>
+                                            <a href="{{$uvcell  -> Village ->blueprint}}" download>
                                                 <span class="fa fa-download text-success"></span> </a>
                                         </button>
                                     </td>
 
-{{--                                          @if($uvcsector->count()>0)
+                                    @if($uvcell -> approval_status =="permited" || $uvcell -> approval_status =="approved")
+                                        <td><span class="text-success">{{$uvcell -> approval_status}}</span></td>
+                                        <td class="text-success">Waiting ..</td>
 
---}}{{--                                        @foreach ($uvcsector -> where('applicant_id',Session::get('citizensession')) as $uvcs)--}}{{--
-                                             @foreach ($uvcsector -> where($uvi-> applicant_id,Session::get('citizensession')) as $uvcs)
-                                            <td><span class="text-warning">{{$uvcs -> approval_status}}</span></td>
---}}{{--                                            <td><span class="text-warning">{{$uvcs -> Cell -> approval_status}}</span></td>--}}{{--
-                                            <td><span class="text-warning">Sector</span></td>
-                                            @endforeach
+                                    @elseif($uvcell -> approval_status =="rejected")
+                                        <td><span class="text-danger">{{$uvcell -> approval_status}}</span></td>
+                                        <td class="text-danger">Waiting ..</td>
 
-                                          @else
+                                    @else
+                                        <td><span class="text-warning">{{$uvcell -> approval_status}}</span></td>
+                                        <td class="text-warning">Waiting ..</td>
+                                    @endif
 
-                                            @if($uvcell -> count()>0)
+                                    <td><span class="text-warning">Cell</span></td>
+                                    <td>{{$uvcs -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+                                </tr>
+                                           @else
+                                                @if($uvillage -> count()>0)
 
-                                            @foreach ($uvcell->Village -> UserApplicant -> where('applicant_id',Session::get('citizensession')) as $uvc)
-                                                <td><span class="text-warning">{{$uvc -> approval_status}}</span></td>
-                                                <td><span class="text-warning">Cell</span></td>
-                                            @endforeach
-                                                @else
-                                                <td><span class="text-warning">{{$uvi -> approval_status}}</span></td>
-                                                <td><span class="text-warning">village</span></td>
-                                             @endif
+                                                    <?php $count++ ?>
+                                                    <tr>
+                                                        <td> <?php echo $count  ?></td>
+                                                        <td>{{$uvillage -> reason}}</td>
 
+                                                        <td><button type="button" class="btn btn-md btn-default" >
+                                                                <span class="fa fa-clipboard "></span> </a>
+                                                                <a href="{{$uvillage -> landcertificate}}" download>
+                                                                    <span class="fa fa-download text-warning"></span> </a>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-md btn-default" >
+                                                                <span class="fa fa-clipboard "></span> </a>
+                                                                <a href="{{$uvillage ->blueprint}}" download>
+                                                                    <span class="fa fa-download text-success"></span> </a>
+                                                            </button>
+                                                        </td>
 
+                                                        @if($uvillage -> approval_status =="permited" || $uvillage -> approval_status =="approved")
+                                                            <td><span class="text-success">{{$uvillage -> approval_status}}</span></td>
+                                                            <td class="text-success">Waiting ..</td>
 
-                                        @endif--}}
+                                                        @elseif($uvillage -> approval_status =="rejected")
+                                                            <td><span class="text-danger">{{$uvillage -> approval_status}}</span></td>
+                                                            <td class="text-danger">Waiting ..</td>
 
-                                         @if($uvi -> approval_status =="permited" || $uvi -> approval_status =="approved")
-                                        <td><span class="text-success">{{$uvi -> approval_status}}</span></td>
-                                         @else
-                                            <td><span class="text-warning">{{$uvi -> approval_status}}</span></td>
+                                                        @else
+                                                            <td><span class="text-warning">{{$uvillage -> approval_status}}</span></td>
+                                                            <td class="text-warning">Waiting ..</td>
+                                                        @endif
 
-                                        @endif
-                                        <td>{{$uvi -> created_at}}</td>
-
-                                        {{--<td>--}}
-                                            {{--@if($uvi->approval_status !="pending")--}}
-                                                {{--<button class="btn btn-primary btn-sm disabled">Edit</button>--}}
-                                            {{--@else--}}
-                                                {{--<button class="btn btn-primary btn-sm">Edit</button>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
-
-
-
-                                    </tr>
-                                    @endforeach
+                                                        <td><span class="text-warning">Cell</span></td>
+                                                        <td>{{$uvillage -> Cell -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+                                                    </tr>
+                                                    @endif
+                                               @endif
+                                         @endif
 
                                     </tbody>
                                 </table>
                                     <div class="row " >
                                         <div class="myfooter offset-2" >
                                             {{--show pagination--}}
-                                            {{$uvillage -> links() }}
+                                            {{--{{$uvillage -> links() }}--}}
                                         </div>
 
                                     </div>

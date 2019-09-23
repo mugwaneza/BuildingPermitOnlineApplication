@@ -134,18 +134,21 @@ $(".RejectBtn").click(function() {
 
 //search function
  var textbox2 = document.getElementById('search');
-  textbox2.addEventListener("keypress", function onEvent(event) {
-    if (event.key === "Enter") {
-        var $search = $("#search").val();
-        window.location.href = "/admin/search/"+$search;
-    }
-  });
+
+if(textbox2) {
+    textbox2.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "Enter") {
+            var $search = $("#search").val();
+            window.location.href = "/admin/search/" + $search;
+        }
+    });
+   }
 
 // Details button when is clicked
     $(".btnDetails").click(function () {
 //$(document).on("click", ".btnDetails", function(){
 
-        $(document).on("click", ".btnDetails", function(){
+        //$(document).on("click", ".btnDetails", function(){
 
         var $row = $(this).closest("tr");  // Find the row
         var $tdname = $row.find(".name").text(); // Find the text

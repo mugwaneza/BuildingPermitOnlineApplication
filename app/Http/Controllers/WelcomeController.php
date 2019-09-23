@@ -136,8 +136,8 @@ class WelcomeController extends Controller
         $userid = Session::get('citizensession');
 
         $uvillage = $myapplication->uvFunction($userid);
-        $uvcell = $myapplication->uvcFunction();
-        $uvcsector = $myapplication->uvcFunction();
+        $uvcell = $myapplication->uvcFunction($userid);
+        $uvcsector = $myapplication->uvcsFunction($userid);
 
         // get applicant infomartion
         $userInfo = Users::find($userid);

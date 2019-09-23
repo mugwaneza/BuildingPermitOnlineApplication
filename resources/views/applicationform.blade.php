@@ -9,17 +9,17 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="review-content-section">
                         <div id="dropzone1" class="pro-ad">
-                            <br><h3 class="col-md-offset-2 "> Fill the following form for building permit application</h3><br>
+                            <br><h3 class="col-md-offset-2 "> Fill the following form for Online Building Permit Application</h3><br>
 
 
-                            <form action="/apply" class="dropzone dropzone-custom needsclick add-professors" method="post" id="demo1-upload" autocomplete="off" enctype="multipart/form-data">
+                            <form action="/apply" class="dropzone dropzone-custom needsclick add-professors col-md-offset-2" method="post" id="demo1-upload" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @include('error_message')
 
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <label>National Identity number</label>
+                                            <label>ID</label>
                                             <input name="nid" disabled class="form-control" placeholder="National Identity" value="{{$userInfo['nid']}}">
                                         </div>
 

@@ -68,23 +68,30 @@ class Functions extends Controller
       // Jonins Users and Village
       $uvillage = VillageApproval::with('UserApplicant')
           -> where("applicant_id",$userid)
+          -> where("approval_status",'pending')
           -> paginate(4);
       return $uvillage;
   }
 
-    public function uvcFunction(){
+    public function uvcFunction($id){
 
         // joins user ,Village and cell
         $uvcell = CellApproval::with('Village.UserApplicant')
+            ->whereHas('Village.UserApplicant', function($query) use ($id){
+                $query->where('applicant_id', $id);
+            })
         -> get();
           return $uvcell;
   }
 
 
-    public function uvcsFunction(){
+    public function uvcsFunction($id){
         // joins users , village ,cell and  sector
         $uvcsector = SectorApproval::with('Cell.Village.UserApplicant')
-        -> get();
+            ->whereHas('Cell.Village.UserApplicant', function($query) use ($id){
+                $query->where('applicant_id', $id);
+            })
+            -> get();
         return $uvcsector;
 
     }
