@@ -26,7 +26,7 @@ class WelcomeController extends Controller
     public function CitizenRegister(Request $request){
         $rules = [
             'name' => 'required|min:3',
-            'nid' => 'required|unique:users',
+            'nid' => 'required|min:16|max:16|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5',
             'comfirmpass' => 'required|min:5|same:password',

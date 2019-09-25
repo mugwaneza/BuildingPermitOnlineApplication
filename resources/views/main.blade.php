@@ -89,6 +89,12 @@
         <!-- scrollUp JS
         ============================================ -->
         <script src="{{@asset('js/jquery.scrollUp.min.js')}}"></script>
+
+           <!-- print JS
+        ============================================ -->
+        <script src="{{@asset('js/jQuery.print.js')}}"></script>
+
+
         <!-- counterup JS
         ============================================ -->
         <script src="{{@asset('js/counterup/jquery.counterup.min.js')}}"></script>

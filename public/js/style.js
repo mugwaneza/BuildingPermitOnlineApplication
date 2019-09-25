@@ -170,3 +170,19 @@ if(textbox2) {
 
         $("#DetailModel").modal('show');
     });
+
+
+  $(".printCertBtn").click(function(){
+
+    var $row = $(this).closest("tr");  // Find the row
+    var $tdname = $row.find(".landmanager").text(); // Find the text
+    $('#landmanagername').append($.trim($tdname));
+
+      $('#no').css('margin-left', '45%');
+      $('#contents').css('margin-top', '10%');
+      $('#regards').css('margin-top', '20%');
+      $('.printableCert').show();
+      jQuery('#printableCert').print();
+
+
+  });

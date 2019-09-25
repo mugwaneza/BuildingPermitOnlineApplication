@@ -87,7 +87,7 @@ class Functions extends Controller
 
     public function uvcsFunction($id){
         // joins users , village ,cell and  sector
-        $uvcsector = SectorApproval::with('Cell.Village.UserApplicant')
+        $uvcsector = SectorApproval::with('Cell.Village.UserApplicant','SectorCoord')
             ->whereHas('Cell.Village.UserApplicant', function($query) use ($id){
                 $query->where('applicant_id', $id);
             })

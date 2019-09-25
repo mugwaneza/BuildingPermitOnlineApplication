@@ -13,7 +13,8 @@
                                 <br><h3 class="col-md-offset-2 " style="margin-top: 50px;">Personal applications</h3><br>
                                 @if($uvillage -> count()>0 || $uvcsector->count()>0 ||$uvcell ->count()>0 )
 
-                                 <table class="table table-responsive table-bordered table-hover table-striped col-md-offset-2">
+
+                      <table class="table table-responsive table-bordered table-hover table-striped col-md-offset-2">
                                     <thead>
                                         <th>No</th>
                                         <th>Reason</th>
@@ -51,8 +52,12 @@
                                        </td>
 
                                          @if($uvcs -> approval_status =="permited" || $uvcs -> approval_status =="approved")
-                                        <td><span class="text-success">{{$uvcs -> approval_status}}</span></td>
-                                        <td class="text-success">{{$uvcs -> feeback}}</td>
+                                        <td><span class="text-succes text-left">{{$uvcs -> approval_status}}</span></td>
+                                        <td class="text-success">{{$uvcs -> feeback}}<br>
+                                            <button type="button" class="btn btn-md btn-default printCertBtn center-block" >
+                                            <span class="fa fa fa-download text-info"></span>
+                                             </button>
+                                        </td>
 
                                         @elseif($uvcs -> approval_status =="rejected")
                                          <td><span class="text-danger">{{$uvcs -> approval_status}}</span></td>
@@ -65,6 +70,7 @@
 
                                             <td><span class="text-warning">Sector</span></td>
                                             <td>{{$uvcs -> Cell -> Village -> UserApplicant -> created_at ->format('d-m-Y')}}</td>
+                                            <td class="landmanager" hidden>{{$uvcs -> SectorCoord -> name}}</td>
 
                                     </tr>
                                     @endforeach
@@ -159,6 +165,37 @@
 
                                     </tbody>
                                 </table>
+
+                                       <div class="printableCert col-md-offset-2"  id="printableCert" style="display: none">
+                                        <div class="logopermit" >
+
+                                        </div>
+                                        <div><p class="fonnt-bold text-big">
+                                                <img src="{{@asset('fileuploads/buildingpermit.png')}}">
+
+                                                <b class="col-md-offset-5" id="no">NO: <?php echo (rand()); ?> </b></p>
+                                        </div>
+                                        <br><p class="text-uppercase  text-big">
+                                               <b>Date: </b> <?php $now = new DateTime();
+                                                           echo $now->format('d-m-Y'); ?><br>
+                                               <b>Sector:</b> {{$userInfo['sector']}}<br>
+                                               <b>Cell:</b> {{$userInfo['cell']}}<br>
+                                               <b>Village:</b> {{$userInfo['village']}}<br>
+                                               <b>Dear</b> {{$userInfo['name']}}: <br>
+                                                </p>
+                                         <p class="text-center"><b>ONLINE BUILDING PERMIT CERTIFICATE</b></p>
+                                        <p id="contents">This certificate is to let you know that we have received your application and you are allowed
+                                            to build the <b>Plot number : UPI - <?php echo rand(10, 10000); ?></b> for which you applied,Thank you
+                                            again, for your interest in our sytem. We do appreciate the time
+                                            that you invested in this application.</p>
+
+                                        <p class="mt-5" id="regards">Regards,<br>
+                                        Land manager<br>
+                                        <b><span id="landmanagername"></span></b>
+                                        </p>
+                                       </div>
+
+
                                     <div class="row " >
                                         <div class="myfooter offset-2" >
                                             {{--show pagination--}}
